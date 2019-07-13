@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form projectid="103" form-administrator="kevin@renderx.com" number="9999999"
+    title="Part II: Comprehensive Sample PDF Form using RenderX">
+    <actions>
+        <action name="submit" type="submit" text="Echo"
+            url="http://www.foactive.com/Forms/Service.PDF.Echo.aspx"/>
+        <action name="burn" type="submit" text="Burn"
+            url="http://www.foactive.com/Forms/Service.PDF.Burn.aspx"/>
+        <action name="flatten" type="submit" text="Flatten"
+            url="http://www.foactive.com/Forms/Service.PDF.Flatten.aspx"/>
+        <action name="compact" type="submit" text="Compact"
+            url="http://www.foactive.com/Forms/Service.PDF.Compact.aspx"/>
+        <action name="blank" type="submit" text="Blank"
+            url="http://www.foactive.com/Forms/Service.PDF.Blank.aspx"/>
+        <action name="submit2" type="email" text="E-Mail"/>
+    </actions>
+    <forminfo>
+        <header1 type="link" url="http://www.renderx.com">RenderX, Inc.</header1>
+        <header2>PDF Forms Survey</header2>
+        <header3>The Leader in XML to Print</header3>
+        <header4>Prepared for <link nameref="recipientname"/> (<link nameref="email"/>)</header4>
+        <footer1 type="link">http://www.renderx.com</footer1>
+        <footer2 type="page"/>
+        <footer3 type="logo">logo-renderx.svg</footer3>
+    </forminfo>
+    <recipient>
+        <name name="recipientname" hidden="true">John/Jane Doe</name>
+        <email name="email" hidden="true">email@site.com</email>
+        <field1 name="custom_field1" hidden="true">Text of hidden field 1</field1>
+        <field2 name="custom_field2" hidden="true">Text of hidden field 2</field2>
+    </recipient>
+    <data>
+        <instructions>
+            <para><link nameref="recipientname"/>, welcome to part II of your demonstration. This is
+                a sample survey form created using <b>RenderX's PDF Checklist <i>CoolTool</i></b>.
+                It shows the variety of things you can <u>easily</u> do with this technology. Form
+                objects such as checkboxes, textboxes, multilines, option groups and comboboxes are
+                all supported through specifying simple XML structures. The Checklist document
+                structure supports sections, categories and instruction areas, and also has an easy
+                customization XSL where all appearance properties are specified. It also has a
+                default JavaScript library that you can extend with custom functions.</para>
+            <para>You likely have already completed the first part of this demonstration, filling
+                out and submitting our survey form. Now, this is a sample form showing the different
+                elements you can use. As part of the submit process, RenderX's PDF Forms Processing
+                Server software has auto-generated this XML file with your projectID and your email
+                as the form adminstrator. These two items are attributes on this XMLs &lt;form>
+                element. We've also added a set of buttons to show the other capabilities available
+                to you.</para>
+        </instructions>
+        <buttons button_position="top" button_align="center"/>
+        <section>
+            <title>Section 1 - Form Elements</title>
+            <category>
+                <title>Category 1 - Simple Checkboxes</title>
+                <group>
+                    <title>Group Heading</title>
+                    <item>
+                        <checkbox name="cb1" value="true" readonly="true"/>
+                        <description>Mandatory checkbox ("value" and "readonly" are true in the
+                            source)</description>
+                    </item>
+                    <item>
+                        <checkbox name="cb2" value="false"/>
+                        <description>Optional checkbox ("value" is false in the
+                            source)</description>
+                    </item>
+                    <item>
+                        <checkbox name="cb30" value="false" readonly="true"
+                            calculate="checkcheck('cb30','cb31')"/>
+                        <description>Even checkboxes included inline <checkbox name="cb31"
+                                value="false"/> with the content of an item. This example also shows
+                            the checklist JavaScript implementation. The two checkboxes in this
+                            &lt;item> are linked and always have the same state.</description>
+                    </item>
+                </group>
+            </category>
+            <category>
+                <title>Category 2 - Textboxes</title>
+                <item>
+                    <checkbox name="cb3" readonly="true" value="false"
+                        calculate="autocheck('cb3','tb1');"/>
+                    <description>Textbox inline ("length" set to 1in) <textbox length="1in"
+                            maxlen="20" name="tb1"/> where the state of the checklist checkbox is
+                        controlled by the content (see the JavaScript discussions
+                        later).</description>
+                </item>
+                <item>
+                    <checkbox name="cb3a" value="true" readonly="true"
+                        calculate="autocheck('cb3a','tb1a');"/>
+                    <description>Textbox inline ("length" set to 1in) with some <textbox
+                            length="1in" maxlen="20" name="tb1a">default text</textbox>, followed by
+                        a textbox that is a complete line (no length specified), followed by a
+                        multiline textbox. The multiline textbox has a height of 1in in the fillable
+                        form and has six print lines in the blank form.</description>
+                </item>
+                <item>
+                    <checkbox name="cb4" value="false" readonly="true"
+                        calculate="autocheck('cb4','tb2');"/>
+                    <description>
+                        <textbox maxlen="50" name="tb2"/>
+                    </description>
+                </item>
+                <item>
+                    <checkbox name="cb5" value="false" readonly="true"
+                        calculate="autocheck('cb5','ml1');"/>
+                    <description>
+                        <multiline name="ml1" height="1in" printlines="6"
+                            calculate="autocheck('cb5');"/>
+                    </description>
+                </item>
+            </category>
+            <category>
+                <title>Category 3 - Option Groups</title>
+                <item>
+                    <checkbox name="cb6" value="true" readonly="true"/>
+                    <description>Option Group (Choice 2 default, horizontal layout), since the question is already
+                        answered the checklist checkbox is checked and readonly.<br/><optiongroup
+                            name="og1" arrangement="horizontal">
+                            <option name="op1_1">Choice 1</option>
+                            <option name="op1_2" value="true">Choice 2</option>
+                            <option name="op1_3">Choice 3</option>
+                            <option name="op1_4">Choice 4</option>
+                        </optiongroup></description>
+                </item>
+                <item>
+                    <checkbox name="cb6a" value="false" readonly="true"
+                        calculate="optioncheck('cb6a','og1a',4)"/>
+                    <description>Option Group (no choice, vertical layout), since nothing is answered yet, the
+                        checklist checkbox is not yet checked. It will be checked on selecting an
+                        item in the option group.<optiongroup name="og1a" arrangement="vertical">
+                            <option name="op1a_1">Choice 1</option>
+                            <option name="op1a_2">Choice 2</option>
+                            <option name="op1a_3">Choice 3</option>
+                            <option name="op1a_4">Choice 4</option>
+                        </optiongroup></description>
+                </item>
+            </category>
+            <category>
+                <title>Category 4 - Combobox</title>
+                <item>
+                    <checkbox name="cb8" value="true" readonly="true"
+                        calculate="combocheck('cb8','comb1','No Choice')"/>
+                    <description>Combobox (Choice 2 default), selecting any item other than 'No
+                        Choice' will set the checklist item when leaving the field. <combobox
+                            name="comb1" length="1.5in">
+                            <option>Choice 1</option>
+                            <option value="true">Choice 2</option>
+                            <option>Choice 3</option>
+                            <option>Choice 3</option>
+                            <option>Choice 4</option>
+                            <option>Choice 5</option>
+                            <option>Choice 6</option>
+                            <option>Choice 7</option>
+                            <option>Choice 8</option>
+                            <option>Choice 9</option>
+                            <option>No Choice</option>
+                        </combobox></description>
+                </item>
+            </category>
+        </section>
+        <section>
+            <title>Section 2 - JavaScript</title>
+            <category>
+                <title>Category 1 - Creating a checklist</title>
+                <instructions>
+                    <para>This set of JavaScript functions can be helpful in creating a Checklist.
+                        They evaluate form fields for specific content and will automatically check
+                        the corresponding checklist box. In order to ensure things are kept in sync,
+                        you should set the checklist checkbox initial value to the appropriate value
+                        based on your rules and you should also set the "readonly" flag to "true".
+                        This ensures that only the JavaScript controls the state of the
+                        corresponding checklist checkbox. Most examples in this document use the
+                        various JavaScripts available to evaluate the state of checkboxes,
+                        textboxes, multilines, comboboxes and optiongroups.</para>
+                </instructions>
+                <item>
+                    <checkbox name="cb9" value="false" readonly="true"
+                        calculate="autocheck('cb9','tb10');"/>
+                    <description>Autocheck for textboxes like <textbox length="1in" maxlen="20"
+                            name="tb10" calculate="autocheck('cb9');"/>. It will automatically set
+                        the checklist state based on the text length (checked if greater than
+                        "0").</description>
+                </item>
+                <item>
+                    <checkbox name="cb6b" value="false" readonly="true"
+                        calculate="optioncheck('cb6b','og1b',4)"/>
+                    <description> Autocheck for optiongroups without an exclude item will automatically set the checklist
+                        state when an option is specified. <br/>
+                        <optiongroup name="og1b" arrangement="horizontal">
+                            <option name="op1b_1">Choice 1</option>
+                            <option name="op1b_2">Choice 2</option>
+                            <option name="op1b_3">Choice 3</option>
+                            <option name="op1b_4">Choice 4</option>
+                        </optiongroup></description>
+                </item>
+                <item>
+                    <checkbox name="q1" value="false" readonly="true"
+                        calculate="optioncheck('q1','q1choice',5,'q1_5');"/>
+                    <description>Autocheck for option groups with an exclude item, selecting any item other than the excluded one  
+                        will set the checklist state. You specify the option
+                        that is the no selection item, in this case it is 'q1_5' which is 'No Answer'.
+                        <optiongroup name="q1choice" arrangement="vertical">
+                            <option name="q1_1">Answer One</option>
+                            <option name="q1_2">Answer Two</option>
+                            <option name="q1_3">Answer Three</option>
+                            <option name="q1_4">Answer Four</option>
+                            <option name="q1_5">No Answer</option>
+                        </optiongroup>
+                    </description>
+                </item>
+                <item>
+                    <checkbox name="cb8a" value="false" readonly="true"
+                        calculate="combocheck('cb8a','comb1a','No Choice')"/>
+                    <description>Autocheck for comboboxes, selecting any item other than the excluded one 
+                        will set the checklist state when leaving the field. You specify the string
+                        that is the no selection item, in this case it is 'No Choice'.<combobox
+                            name="comb1a" length="1.5in">
+                            <option>Choice 1</option>
+                            <option>Choice 2</option>
+                            <option>Choice 3</option>
+                            <option>Choice 3</option>
+                            <option>Choice 4</option>
+                            <option value="true">No Choice</option>
+                        </combobox></description>
+                </item>
+            </category>
+            <category>
+                <title>Category 2 - Numeric Validation</title>
+                <item>
+                    <checkbox name="cb10" value="false" readonly="true"
+                        calculate="autocheck('cb10','num11');"/>
+                    <description>Ensure integer numbers only in textboxes like <textbox length="1in"
+                            maxlen="20" name="num11" keystroke="isInteger();"/>. This script checks
+                        every keystroke and only allows integer numeric input.</description>
+                </item>
+                <item>
+                    <checkbox name="cb11" value="false" readonly="true"
+                        calculate="autocheck('cb11','tb12');"/>
+                    <description>Ensure numbers only in textboxes like <textbox length="1in"
+                            maxlen="20" name="tb12" keystroke="isNumeric();"/>. This script checks
+                        every keystroke and only allows numeric input.</description>
+                </item>
+            </category>
+            <category>
+                <title>Category 3 - Range Checking</title>
+                <item>
+                    <checkbox name="cb12" value="true" readonly="true"
+                        calculate="autocheck('cb12','tb13');"/>
+                    <description>Ensures the number entered is within a range (use "false" to
+                        exclude the endpoints, "true" to include them) <textbox length="1in"
+                            maxlen="20" name="tb13" keystroke="isNumeric();"
+                            validate="isBetween(2.4,6.7,false);">3.3</textbox>. This script checks
+                        the value entered is between (not including) two numbers. In this example
+                        the numbers are 2.4 and 6.7</description>
+                </item>
+                <item>
+                    <checkbox name="cb13" value="false" readonly="true"
+                        calculate="autocheck('cb13','tb14');"/>
+                    <description>Ensures the number entered is within a range (use "false" to
+                        exclude the endpoints, "true" to include them) <textbox length="1in"
+                            maxlen="20" name="tb14" keystroke="isNumeric();"
+                            validate="isBetween(2.4,6.7,true);"/>. This script checks the value
+                        entered is between (and including) two numbers. In this example the numbers
+                        are 2.4 and 6.7</description>
+                </item>
+                <item>
+                    <checkbox name="cb14" value="false" readonly="true"
+                        calculate="autocheck('cb14','tb15');"/>
+                    <description>Ensures the number entered is not within a range (use "false" to
+                        exclude the endpoints, "true" to include them) <textbox length="1in"
+                            maxlen="20" name="tb15" keystroke="isNumeric();"
+                            validate="isNotBetween(2.4,6.7,false);"/>. This script checks the value
+                        entered is not between (not including) two numbers. In this example the
+                        numbers are 2.4 and 6.7</description>
+                </item>
+                <item>
+                    <checkbox name="cb15" value="true" readonly="true"
+                        calculate="autocheck('cb15','tb16');"/>
+                    <description>Ensures the number entered is not within a range (use "false" to
+                        exclude the endpoints, "true" to include them) <textbox length="1in"
+                            maxlen="20" name="tb16" keystroke="isNumeric();"
+                            validate="isNotBetween(2.4,6.7,true);">1.3</textbox>. This script checks
+                        the value entered is not between (and including) two numbers. In this
+                        example the numbers are 2.4 and 6.7</description>
+                </item>
+                <item>
+                    <checkbox name="cb16" value="false" readonly="true"
+                        calculate="autocheck('cb16','tb17');"/>
+                    <description>Ensures the number entered is greater than or less than a number
+                        (use 'greater' for greater and 'less' for less than. Use "false" to exclude
+                        the endpoints, "true" to include them) <textbox length="1in" maxlen="20"
+                            name="tb17" keystroke="isNumeric();"
+                            validate="isGreaterOrLessThan(2.4,'greater',true);"/>. This script
+                        checks the value entered is greater than or equal to 2.4</description>
+                </item>
+                <item>
+                    <checkbox name="cb17" value="false" readonly="true"
+                        calculate="autocheck('cb17','tb18');"/>
+                    <description>Ensures the number entered is greater than or less than a number
+                        (use 'greater' for greater and 'less' for less than. Use "false" to exclude
+                        the endpoints, "true" to include them) <textbox length="1in" maxlen="20"
+                            name="tb18" keystroke="isNumeric();"
+                            validate="isGreaterOrLessThan(2.4,'greater',false);"/>. This script
+                        checks the value entered is greater than 2.4</description>
+                </item>
+                <item>
+                    <checkbox name="cb18" value="false" readonly="true"
+                        calculate="autocheck('cb18','tb19');"/>
+                    <description>Ensures the number entered is greater than or less than a number
+                        (use 'greater' for greater and 'less' for less than. Use "false" to exclude
+                        the endpoints, "true" to include them) <textbox length="1in" maxlen="20"
+                            name="tb19" keystroke="isNumeric();"
+                            validate="isGreaterOrLessThan(2.4,'less',true);"/>. This script checks
+                        the value entered is less than or equal to 2.4</description>
+                </item>
+                <item>
+                    <checkbox name="cb19" value="false" readonly="true"
+                        calculate="autocheck('cb19','tb20');"/>
+                    <description>Ensures the number entered is greater than or less than a number
+                        (use 'greater' for greater and 'less' for less than. Use "false" to exclude
+                        the endpoints, "true" to include them) <textbox length="1in" maxlen="20"
+                            name="tb20" keystroke="isNumeric();"
+                            validate="isGreaterOrLessThan(2.4,'less',false);"/>. This script checks
+                        the value entered is less than 2.4</description>
+                </item>
+            </category>
+        </section>
+        <section>
+            <title>Section 3 - Hidden Fields</title>
+            <instructions>
+                <para>The form fields you see above are not the only fields in this PDF. You can
+                    also create hidden fields in the document that can be used for further
+                    processing. For the most part, this is used to link the submitted information in
+                    the form with a specific user, or at least to ensure it's uniqueness if you are
+                    generating unique forms to be submitted by individuals. Hidden fields can
+                    contain any string of information you desire (name, account number, email,
+                    account balance, etc.). You may also choose to represent the information in the
+                    actual print form itself or not, this is of course up to you as the form
+                    designer.</para>
+                <para>The style sheets provided will automatically create a hidden form for any XML
+                    element placed in the &lt;recipient> tag that has an attribute "hidden" set
+                    to "true". This example has four hidden fields -- name, email and two custom
+                    fields. You can create as many as you desire. The style sheets also allow an
+                    easy way to insert content from these fields anywhere in the document as text
+                    should you choose to use them. You use a &lt;link> tag with a "nameref"
+                    attribute set to the same name as the hidden field name. For example, a link to
+                    the hidden name field in this document is:</para>
+                <para>&lt;link nameref="recipientname"/> which results in: <link
+                        nameref="recipientname"/></para>
+                <para>Hidden fields are a very important part of a form design and as you can see
+                    they are fully supported by this application.</para>
+            </instructions>
+        </section>
+        <section>
+            <title>Section 4 - Form Actions</title>
+            <category>
+                <title>Form actions</title>
+                <instructions>
+                    <para>Form actions can be specified in the XML file. Each action creates a
+                        button that is located wherever you place the &lt;buttons> tag. This tag
+                        also supports attributes which control their placement. The attribute
+                        "button_position" can be "top", "bottom" or "inline" and the "button_align"
+                        can be "left", "right" or "center". There are several types of actions
+                        supported, set by specifying one of the following in the "type"
+                        attribute.</para>
+                    <para>Specify "<b>submit</b>" to send the form data to the server for further
+                        processing. The form data is automatically submitted to the action's "url"
+                        property in XFDF format (Adobe's XML format for form fields). Of course you
+                        can specify your own "url". RenderX provides some standard ones documented
+                        below with our PDF Forms Processing Server.</para>
+                    <para>Specify "<b>email</b>" to create an email of the form data to be submitted
+                        to the form administrator via the user's default email application. This
+                        style sheet defaults to using the XFDF format.</para>
+                    <para>Specify "<b>reset</b>" to create a form reset button that will return the
+                        whole form back to its original state.</para>
+                </instructions>
+            </category>
+            <category>
+                <title>RenderX PDF Forms Processing Server URLs for Submit</title>
+                <instructions>
+                    <para>RenderX provides several different URLs should you choose to use our PDF
+                        Forms Processing Server. These are specified on the "url" attribute of the
+                        &lt;action> element. All of the examples are in this sample XML
+                        document. Essentially, these submit url's are computer programs that accept
+                        the form submittal and perform a pre-determined application. Each of these
+                        are described in more detail below.</para>
+                    <para><b>Echo</b> is used to send the current selections in the form and echo
+                        the form submittal results back to submitter. The user will see that their
+                        form has been submitted and you as the forms administrator will receive an
+                        email with their responses. The URL to specify on the &lt;action>
+                        is:</para>
+                    <para>http://www.foactive.com/Forms/Service.PDF.Echo.aspx</para>
+                    <para><b>Burn</b> is used to "burn in" the current selections in the form and
+                        send this fillable form back to the user. This allows them to locally save
+                        the form with their selections or even forward along to another user as part
+                        of a workflow. You as the forms administrator will receive an email with
+                        their responses. The URL to specify on the &lt;action> is:</para>
+                    <para>http://www.foactive.com/Forms/Service.PDF.Burn.aspx</para>
+                    <para><b>Flatten</b> is used to generate a non-fillable PDF document with all
+                        their current selections in place and send back to the user. Questions that
+                        are not answered are also presented. You as the forms administrator will
+                        receive an email with their responses. The URL to specify on the
+                        &lt;action> is:</para>
+                    <para>http://www.foactive.com/Forms/Service.PDF.Flatten.aspx</para>
+                    <para><b>Compact</b> is similar to flatten but works in conjunction with the
+                        checklist functionality. If you use the structure in this document with
+                        &lt;item> containing a &lt;checkbox> as it's first child, this
+                        function when called will flatten the form but compact it so only those
+                        questions answered are included in the PDF document. Unanswered questions
+                        (without checklist checks) will be omitted from the results. You as the
+                        forms administrator will receive an email with their responses. The URL to
+                        specify on the &lt;action> is:</para>
+                    <para>http://www.foactive.com/Forms/Service.PDF.Compact.aspx</para>
+                    <para><b>Blank</b> is a way of representing the form on a blank piece of paper
+                        as if you need someone to fill it out offline by hand. No form values are
+                        presented on the printed page. Textboxes and multilines are replaced by
+                        underlines for data entry; comboboxes are replaced by a list of checkboxes.
+                        You as the forms administrator will receive an email with whatever was in
+                        the form fields at that time. The URL to specify on the &lt;action>
+                        is:</para>
+                    <para>http://www.foactive.com/Forms/Service.PDF.Blank.aspx</para>
+                </instructions>
+            </category>
+        </section>
+        <section>
+            <title>Section 5 - Additional Information</title>
+            <category>
+                <title>Getting Started</title>
+                <instructions>
+                    <para>So you have all the elements you need for a complete RenderX PDF forms
+                        solution. This XML file and associated style sheet are merely examples but
+                        should be sufficient for most to complete even a very complex project. You
+                        do need to make sure you set your projectID and form administrator
+                        attributes to the proper values. You should have been assigned a projectID
+                        from RenderX, if not feel free to <basic-link url="mailto:sales@renderx.com"
+                            >contact us</basic-link> for one.</para>
+                    <para>You can use this XML as a guide or start from scratch. When you have
+                        designed and tested all your elements locally, you <b>should contact us to
+                            publish your XSLs</b> and JavaScript library to our server <b>if you
+                            have made any changes to the base XSLs</b> we have sent you. Your
+                        project directory already has all of the initial files installed so you can
+                        start immediately. In the future we will provide a capability for you to
+                        upload your own but for now we have chosen to publish them ourselves. That's
+                        all you need really. You can generate and send custom, user specific forms
+                        or even post a blank form to any website. If you use our PDF Forms
+                        Processing Server, it provides the default functions shown in this document
+                        and will email you as the form administrator with each form
+                        submittal.</para>
+                    <para>You can create any type of document like a survey, a course evaluation or
+                        even training course tests. Individual responses are sent to your email
+                        whenever a submit is made. As this is a demonstration system, we'll do our
+                        best to keep it all oiled and working but remember its for demonstration. If
+                        you want to purchase a production-level installation, <basic-link
+                            url="mailto:sales@renderx.com">contact us</basic-link>.</para>
+                </instructions>
+            </category>
+            <category>
+                <title>Technical Details for the Tech Savvy Folks</title>
+                <instructions>
+                    <para>All of this is done with pure standards with some extensions in
+                        RenderX's implementation of XSL FO for making PDF forms and allowing
+                        JavaScript in PDF. Only the PDF Forms Processing Server has some custom code
+                        to process and handle results but even then, there is a lot of XML and XSL
+                        going on. If you look deeper into the PDF form XSLs provided, you will see a
+                        little magic going on. </para>
+                    <para>One of those "magic" areas is that the original XML that generates the
+                        form is embedded in the PDF document. Why? Well, that XML file is extracted
+                        by the PDF Forms Processing Server and the values in the XML file are
+                        replaced by the values submitted in the form response. This matching is done
+                        by using the form field "name" attribute so it is <b>important</b> to give a
+                        unique name to your fields. The style sheet will do this with
+                            <i>generate-id()</i> if you do not specify your own field name. This
+                        allows you to create forms without specifying names, but only <i>for testing
+                            purposes</i>. If you ever want to use the data you are recieving from
+                        the form submittal, you need to know what that data represents. Identifying
+                        your form fields with known name identifiers is the proper method.</para>
+                    <para>You should not (for obvious reasons) change the areas of the provided
+                        stylesheets that send the XML file, projectID or the form adminstrator back
+                        to the server or you will be unable to process your forms on the
+                        server.</para>
+                    <para>Custom PDF Forms Proccessing Server plugins are used to do things like send emails or even perform operations like
+                        cutting a license key. The default PDF Forms Processing Server takes the original XML file
+                        embedded in the form, replaces the data with that of the form submission,
+                        uses your projectID to lookup your XSL, and optionally re-run RenderX
+                        setting the proper parameter for the desired output. It delivers back the form echo results or the resulting PDF, streamed to the user's
+                        browser. Nothing is written to our system at all, all responses are
+                        immediately processed in memory and sent out.</para>
+                    <para>The package includes the XML ("<i>sample.xml</i>") that produces this form
+                        and some other associated files. "<i>checklist.xsl</i>" is the main XSL that
+                        processes the XML file. "<i>customize.xsl</i>" contains many of the style
+                        parameters that control various formatting options for both the content as
+                        well as the PDF form fields. "<i>xml-to-string.xsl</i>" is an included
+                        stylesheet that converts the source XML into a string that can be embedded
+                        into one (or more) form fields. There is a limitation in Adobe PDF form
+                        fields that allow only about 30,000 characters in a field so this string is
+                        chopped into multiple fields if necessary. "<i>header-footer.xsl</i>" just
+                        separates the header and footer templates from the main form template for
+                        easier editing of these frequently changed templates.</para>
+                    <para>"<i>RXjslib.js</i>" is a small XML file with the general JavaScript
+                        library. This file is inserted into the form and was put into a separate
+                        file so that you can use context-sensitive JavaScript editors to assist you
+                        in writing your own JavaScript functions. </para>
+                    <para>Good luck on your projects and of course we at RenderX are always
+                        available to help you. Visit <basic-link url="http://www.renderx.com"
+                            >RenderX's Website</basic-link> for more information.</para>
+                </instructions>
+            </category>
+        </section>
+    </data>
+</form>
